@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "252847091291",
+    "project_id": "flowershop-339a3",
+    "storage_bucket": "flowershop-339a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252847091291:android:68d98bd14fb0194914597e",
+        "android_client_info": {
+          "package_name": "fpt.edu.vn.a420flowershop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsCD6TKVokl9imU3je8gZzxgF_9NvetLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

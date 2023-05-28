@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation2"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="fpt.edu.vn.a420flowershop.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="fpt.edu.vn.a420flowershop.ui.profile.profileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_category"
+        android:name="fpt.edu.vn.a420flowershop.ui.category.CategoryFragment"
+        android:label="@string/category"
+        tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/nav_offers"
+        android:name="fpt.edu.vn.a420flowershop.ui.offers.OfferFragment"
+        android:label="@string/offers"
+        tools:layout="@layout/fragment_offer" />
+    <fragment
+        android:id="@+id/nav_new_product"
+        android:name="fpt.edu.vn.a420flowershop.ui.newProduct.newProductFragment"
+        android:label="@string/new_product"
+        tools:layout="@layout/fragment_new_product" />
+    <fragment
+        android:id="@+id/nav_my_order"
+        android:name="fpt.edu.vn.a420flowershop.ui.myOrder.MyOrderFragment"
+        android:label="@string/my_order"
+        tools:layout="@layout/fragment_my_order" />
+    <fragment
+        android:id="@+id/nav_my_cart"
+        android:name="fpt.edu.vn.a420flowershop.ui.myCart.MyCartFragment"
+        android:label="@string/my_cart"
+        tools:layout="@layout/fragment_my_cart" />
+</navigation>
