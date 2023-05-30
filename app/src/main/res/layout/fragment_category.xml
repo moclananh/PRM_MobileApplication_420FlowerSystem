@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.category.CategoryFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:id="@+id/cat_rec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
