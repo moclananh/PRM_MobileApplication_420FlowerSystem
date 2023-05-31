@@ -3,22 +3,21 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="15dp">
-
-
+    app:cardCornerRadius="8dp"
+    app:cardElevation="3dp"
+    android:layout_margin="5dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp">
         <ImageView
-            android:id="@+id/pop_img"
+            android:id="@+id/rec_img"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:src="@mipmap/ic_launcher_round"/>
         <TextView
-            android:id="@+id/pop_name"
+            android:id="@+id/rec_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product Name"
@@ -27,7 +26,7 @@
         <TextView
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:id="@+id/pop_des"
+            android:id="@+id/rec_des"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
@@ -41,25 +40,13 @@
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:background="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/pop_rating"
-                android:text="5.0"
-                android:layout_weight="1"
-                android:layout_marginTop="3dp"/>
-
-        </LinearLayout>
         <TextView
-            android:id="@+id/pop_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:id="@+id/rec_rating"
+            android:text="5.0"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:gravity="end"
-            android:text="Discount 20%"
-            android:textColor="@color/purple_700"
-            android:textStyle="bold" />
+            android:layout_marginTop="3dp"/>
+    </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

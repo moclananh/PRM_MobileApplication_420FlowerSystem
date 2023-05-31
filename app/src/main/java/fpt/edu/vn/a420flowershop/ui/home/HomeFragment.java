@@ -25,14 +25,16 @@ import java.util.List;
 
 import fpt.edu.vn.a420flowershop.Adapters.HomeAdapter;
 import fpt.edu.vn.a420flowershop.Adapters.PopularAdapters;
+import fpt.edu.vn.a420flowershop.Adapters.RecommendedAdapter;
 import fpt.edu.vn.a420flowershop.Models.HomeCategory;
 import fpt.edu.vn.a420flowershop.Models.PopularModel;
+import fpt.edu.vn.a420flowershop.Models.RecommendedModel;
 import fpt.edu.vn.a420flowershop.R;
 import fpt.edu.vn.a420flowershop.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView popularRec, homeCatRec;
+    RecyclerView popularRec, homeCatRec, recommendedRec;
     FirebaseFirestore db;
     //popular item
     List<PopularModel> popularModelList;
@@ -40,6 +42,9 @@ public class HomeFragment extends Fragment {
     //Home category
     List<HomeCategory> categoryList;
     HomeAdapter homeAdapter;
+    //Recommended
+    List<RecommendedModel> recommendedModelList;
+    RecommendedAdapter recommendedAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -47,6 +52,7 @@ public class HomeFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         popularRec = root.findViewById(R.id.pop_rec);
         homeCatRec = root.findViewById(R.id.explore_rec);
+        recommendedRec = root.findViewById(R.id.recommened_rec);
         //popular item
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         popularModelList = new ArrayList<>();
@@ -85,6 +91,28 @@ public class HomeFragment extends Fragment {
                                 HomeCategory homeCategory = document.toObject(HomeCategory.class);
                                 categoryList.add(homeCategory);
                                 homeAdapter.notifyDataSetChanged();
+                            }
+                        }else {
+                            Toast.makeText(getActivity(), "Error: "+ task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        //recommended
+        recommendedRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        recommendedModelList = new ArrayList<>();
+        recommendedAdapter =  new RecommendedAdapter(getActivity(), recommendedModelList);
+        recommendedRec.setAdapter(recommendedAdapter);
+
+        db.collection("Recommended")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()){
+                                RecommendedModel recommendedModel = document.toObject(RecommendedModel.class);
+                                recommendedModelList.add(recommendedModel);
+                                recommendedAdapter.notifyDataSetChanged();
                             }
                         }else {
                             Toast.makeText(getActivity(), "Error: "+ task.getException(), Toast.LENGTH_SHORT).show();
