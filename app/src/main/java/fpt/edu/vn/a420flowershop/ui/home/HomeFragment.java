@@ -23,26 +23,30 @@ import com.google.firebase.ktx.Firebase;
 import java.util.ArrayList;
 import java.util.List;
 
+import fpt.edu.vn.a420flowershop.Adapters.HomeAdapter;
 import fpt.edu.vn.a420flowershop.Adapters.PopularAdapters;
+import fpt.edu.vn.a420flowershop.Models.HomeCategory;
 import fpt.edu.vn.a420flowershop.Models.PopularModel;
 import fpt.edu.vn.a420flowershop.R;
 import fpt.edu.vn.a420flowershop.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView popularRec;
+    RecyclerView popularRec, homeCatRec;
     FirebaseFirestore db;
     //popular item
     List<PopularModel> popularModelList;
     PopularAdapters popularAdapters;
-
+    //Home category
+    List<HomeCategory> categoryList;
+    HomeAdapter homeAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         db = FirebaseFirestore.getInstance();
         popularRec = root.findViewById(R.id.pop_rec);
-
+        homeCatRec = root.findViewById(R.id.explore_rec);
         //popular item
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         popularModelList = new ArrayList<>();
@@ -65,7 +69,28 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
+        //home category
+        homeCatRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        categoryList = new ArrayList<>();
+        homeAdapter =  new HomeAdapter(getActivity(), categoryList);
+        homeCatRec.setAdapter(homeAdapter);
 
+        db.collection("HomeCategory")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()){
+                                HomeCategory homeCategory = document.toObject(HomeCategory.class);
+                                categoryList.add(homeCategory);
+                                homeAdapter.notifyDataSetChanged();
+                            }
+                        }else {
+                            Toast.makeText(getActivity(), "Error: "+ task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
         return root;
     }
 }
