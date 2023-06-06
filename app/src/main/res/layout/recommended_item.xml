@@ -23,35 +23,37 @@
             android:text="Product Name"
             android:textSize="19dp"
             android:textStyle="bold"/>
-        <TextView
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/rec_des"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:text="description"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rec_price"
-            android:text="Price"/>
             <ImageView
                 android:layout_marginLeft="-5dp"
                 android:layout_width="70dp"
                 android:layout_height="30dp"
-                android:background="@color/black"/>
+                android:src="@drawable/ratingbar"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rec_rating"
+                android:text="5.0"
+                android:layout_weight="1"
+                android:layout_marginTop="3dp"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rec_rating"
-            android:text="5.0"
-            android:layout_weight="1"
-            android:layout_marginTop="3dp"/>
-    </LinearLayout>
+            android:id="@+id/rec_price"
+            android:text="Price"
+            android:textColor="#FF0000"/>
+
+        <TextView
+            android:id="@+id/rec_des"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="Description" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
