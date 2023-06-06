@@ -29,6 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Activities.ViewAllActivity"
+            android:theme="@style/Theme.420FlowerShop.NoActionBar"
+            android:exported="false" />
+
+
+
     </application>
 
 </manifest>

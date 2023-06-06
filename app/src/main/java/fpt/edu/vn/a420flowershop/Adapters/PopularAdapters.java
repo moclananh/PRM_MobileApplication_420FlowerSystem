@@ -1,6 +1,7 @@
 package fpt.edu.vn.a420flowershop.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.google.android.material.transition.Hold;
 
 import java.util.List;
 
+import fpt.edu.vn.a420flowershop.Activities.MainActivity;
+import fpt.edu.vn.a420flowershop.Activities.ViewAllActivity;
 import fpt.edu.vn.a420flowershop.Models.PopularModel;
 import fpt.edu.vn.a420flowershop.R;
 
@@ -41,6 +44,15 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
         holder.rating.setText(popularModelList.get(position).getRating());
         holder.des.setText(popularModelList.get(position).getDescription());
         holder.discount.setText(popularModelList.get(position).getDiscount());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewAllActivity.class);
+                intent.putExtra("type", popularModelList.get(holder.getAdapterPosition()).getType());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
