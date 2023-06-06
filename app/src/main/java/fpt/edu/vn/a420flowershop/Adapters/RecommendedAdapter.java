@@ -37,7 +37,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         Glide.with(context).load(list.get(position).getImg_url()).into(holder.imageView);
         holder.name.setText(list.get(position).getName());
         holder.description.setText(list.get(position).getDescription());
-        holder.rating.setText(list.get(position).getRating());
+        holder.price.setText(list.get(position).getPrice());
     }
 
     @Override
@@ -47,13 +47,13 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView name, description, rating;
+        TextView name, description, price;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.rec_img);
             name = itemView.findViewById(R.id.rec_name);
             description = itemView.findViewById(R.id.rec_des);
-            rating = itemView.findViewById(R.id.rec_rating);
+            price = itemView.findViewById(R.id.rec_price);
         }
     }
 }

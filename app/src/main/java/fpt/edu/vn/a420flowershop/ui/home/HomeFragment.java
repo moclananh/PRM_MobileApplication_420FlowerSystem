@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +24,6 @@ import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import fpt.edu.vn.a420flowershop.Adapters.HomeAdapter;
 import fpt.edu.vn.a420flowershop.Adapters.PopularAdapters;
 import fpt.edu.vn.a420flowershop.Adapters.RecommendedAdapter;
@@ -33,7 +34,8 @@ import fpt.edu.vn.a420flowershop.R;
 import fpt.edu.vn.a420flowershop.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
-
+    ScrollView scrollView;
+    ProgressBar progressBar;
     RecyclerView popularRec, homeCatRec, recommendedRec;
     FirebaseFirestore db;
     //popular item
@@ -53,6 +55,10 @@ public class HomeFragment extends Fragment {
         popularRec = root.findViewById(R.id.pop_rec);
         homeCatRec = root.findViewById(R.id.explore_rec);
         recommendedRec = root.findViewById(R.id.recommened_rec);
+        scrollView = root.findViewById(R.id.scroll_view);
+        progressBar = root.findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
         //popular item
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         popularModelList = new ArrayList<>();
@@ -69,6 +75,8 @@ public class HomeFragment extends Fragment {
                                 PopularModel popularModel = document.toObject(PopularModel.class);
                                 popularModelList.add(popularModel);
                                 popularAdapters.notifyDataSetChanged();
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
                             }
                         }else {
                             Toast.makeText(getActivity(), "Error: "+ task.getException(), Toast.LENGTH_SHORT).show();
