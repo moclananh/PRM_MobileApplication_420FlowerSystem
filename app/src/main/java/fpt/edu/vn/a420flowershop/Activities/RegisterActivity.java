@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import fpt.edu.vn.a420flowershop.Models.UserModel;
@@ -49,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void init_view() {
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance("https://flowershop-339a3-default-rtdb.firebaseio.com/");
         progressBar = findViewById(R.id.idprogressbar);
         progressBar.setVisibility(View.GONE);
         //button
@@ -114,9 +115,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
 
-                    UserModel userModel = new UserModel(userName, userEmail, userPhone, userPassword, userRePassword);
+                    UserModel user = new UserModel(userName, userEmail, userPhone, userPassword, userRePassword);
                     String id = task.getResult().getUser().getUid();
-                    database.getReference().child("Users").child(id).setValue(userModel);
+                    database.getReference().child("Users").child(id).setValue(user);
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(RegisterActivity.this, "Register successfull", Toast.LENGTH_SHORT).show();
                 } else {
