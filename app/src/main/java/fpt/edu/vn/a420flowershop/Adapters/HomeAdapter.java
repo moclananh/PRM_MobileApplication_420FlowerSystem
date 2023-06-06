@@ -1,6 +1,7 @@
 package fpt.edu.vn.a420flowershop.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.icu.text.Transliterator;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import fpt.edu.vn.a420flowershop.Activities.ViewAllActivity;
 import fpt.edu.vn.a420flowershop.Models.HomeCategory;
 import fpt.edu.vn.a420flowershop.R;
 
@@ -38,6 +40,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(context).load(categoryList.get(position).getImg_url()).into(holder.catImg);
         holder.name.setText(categoryList.get(position).getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewAllActivity.class);
+                intent.putExtra("type", categoryList.get(holder.getAdapterPosition()).getType());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -1,6 +1,9 @@
 package fpt.edu.vn.a420flowershop.Models;
 
-public class    ViewAllModel {
+import java.io.Serializable;
+
+public class ViewAllModel implements Serializable {
+
     String name;
     String description;
     String rating;

@@ -1,6 +1,7 @@
 package fpt.edu.vn.a420flowershop.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+
+import fpt.edu.vn.a420flowershop.Activities.DetailedActivity;
 import fpt.edu.vn.a420flowershop.Models.ViewAllModel;
 import fpt.edu.vn.a420flowershop.R;
 
@@ -39,9 +42,17 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHold
         holder.name.setText(list.get(position).getName());
         holder.description.setText(list.get(position).getDescription());
         holder.rating.setText(list.get(position).getRating());
-//        holder.price.setText(list.get(position).getPrice()+"/kg");
-        holder.price.setText(list.get(position).getPrice() + "") ;
+        holder.price.setText(list.get(position).getPrice() + "/kg") ;
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailedActivity.class);
+                intent.putExtra("detail", list.get(holder.getAdapterPosition()));
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
