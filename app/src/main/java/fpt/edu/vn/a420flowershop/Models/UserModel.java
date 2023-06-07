@@ -6,6 +6,7 @@ public class UserModel {
     String phone;
     String password;
     String re_password;
+    String profileImg;
 
     public UserModel(){
 
@@ -18,6 +19,10 @@ public class UserModel {
         this.password = password;
         this.re_password = re_password;
     }
+
+
+
+
 
     public String getUsername() {
         return username;
@@ -57,5 +62,13 @@ public class UserModel {
 
     public void setRe_password(String re_password) {
         this.re_password = re_password;
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 }
