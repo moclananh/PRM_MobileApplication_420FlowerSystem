@@ -7,6 +7,7 @@ public class UserModel {
     String password;
     String re_password;
     String profileImg;
+    String address;
 
     public UserModel(){
 
@@ -70,5 +71,12 @@ public class UserModel {
 
     public void setProfileImg(String profileImg) {
         this.profileImg = profileImg;
+    }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
