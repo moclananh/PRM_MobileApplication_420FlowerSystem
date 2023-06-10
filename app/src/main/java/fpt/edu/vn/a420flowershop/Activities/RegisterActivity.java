@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,13 +77,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-
+   Boolean isAdmin = false;
     private void createUser() {
         String userName = username.getText().toString();
         String userPhone = phone.getText().toString();
         String userEmail = email.getText().toString();
         String userPassword = password.getText().toString();
         String userRePassword = re_password.getText().toString();
+        Boolean userIsAdmin = isAdmin;
 
         if (TextUtils.isEmpty((userName))) {
             Toast.makeText(this, "Username is not empty!", Toast.LENGTH_SHORT).show();
@@ -100,10 +102,10 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Re-password is not empty!", Toast.LENGTH_SHORT).show();
             return;
         }
-       /* if(!TextUtils.equals(userPassword, userRePassword)){
+        if(!TextUtils.equals(userPassword, userRePassword)){
             Toast.makeText(this, "Password does not match!", Toast.LENGTH_SHORT).show();
             return;
-        }*/
+        }
         if (userPassword.length() < 6) {
             Toast.makeText(this, "Password length must > 6!", Toast.LENGTH_SHORT).show();
             return;
@@ -115,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
 
-                    UserModel user = new UserModel(userName, userEmail, userPhone, userPassword, userRePassword);
+                    UserModel user = new UserModel(userName, userEmail, userPhone, userPassword, userRePassword,"Null","Null", isAdmin);
                     String id = task.getResult().getUser().getUid();
                     database.getReference().child("Users").child(id).setValue(user);
                     progressBar.setVisibility(View.GONE);

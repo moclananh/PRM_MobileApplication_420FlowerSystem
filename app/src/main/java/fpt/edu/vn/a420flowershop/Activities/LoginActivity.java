@@ -17,13 +17,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import fpt.edu.vn.a420flowershop.Models.UserModel;
 import fpt.edu.vn.a420flowershop.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button register, login;
     EditText email, password;
-
     FirebaseAuth auth;
     ProgressBar progressBar;
     @Override
@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.txt_email);
         password = findViewById(R.id.txt_password);
     }
-
     private void click_register(){
         register.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -85,7 +84,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(LoginActivity.this, "Login successfull", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    if (auth.getCurrentUser().getEmail().equals("admin@admin.com")){
+                        startActivity(new Intent(LoginActivity.this, AdminManageActivity.class));
+                    }
+                    else startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }
                 else {
                     progressBar.setVisibility(View.GONE);

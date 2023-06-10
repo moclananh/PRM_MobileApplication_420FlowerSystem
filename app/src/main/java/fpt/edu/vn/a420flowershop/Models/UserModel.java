@@ -8,22 +8,22 @@ public class UserModel {
     String re_password;
     String profileImg;
     String address;
+    Boolean isAdmin;
 
     public UserModel(){
 
     }
 
-    public UserModel(String username, String email, String phone, String password, String re_password) {
+    public UserModel(String username, String email, String phone, String password, String re_password, String profileImg, String address, Boolean isAdmin) {
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.re_password = re_password;
+        this.profileImg = profileImg;
+        this.address = address;
+        this.isAdmin = isAdmin;
     }
-
-
-
-
 
     public String getUsername() {
         return username;
@@ -75,8 +75,14 @@ public class UserModel {
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+    public void setAdmin(Boolean admin) {
+        isAdmin = false;
     }
 }
