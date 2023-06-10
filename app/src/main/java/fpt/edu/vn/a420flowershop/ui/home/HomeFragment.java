@@ -1,9 +1,13 @@
 package fpt.edu.vn.a420flowershop.ui.home;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -17,19 +21,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.ktx.Firebase;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import fpt.edu.vn.a420flowershop.Adapters.HomeAdapter;
 import fpt.edu.vn.a420flowershop.Adapters.PopularAdapters;
 import fpt.edu.vn.a420flowershop.Adapters.RecommendedAdapter;
+import fpt.edu.vn.a420flowershop.Adapters.ViewAllAdapter;
 import fpt.edu.vn.a420flowershop.Models.HomeCategory;
 import fpt.edu.vn.a420flowershop.Models.PopularModel;
 import fpt.edu.vn.a420flowershop.Models.RecommendedModel;
+import fpt.edu.vn.a420flowershop.Models.ViewAllModel;
 import fpt.edu.vn.a420flowershop.R;
 import fpt.edu.vn.a420flowershop.databinding.FragmentHomeBinding;
 
@@ -41,6 +49,13 @@ public class HomeFragment extends Fragment {
     //popular item
     List<PopularModel> popularModelList;
     PopularAdapters popularAdapters;
+
+    //////////////////////Search
+    EditText search_box;
+    private List<ViewAllModel> viewAllModelList;
+    private RecyclerView recyclerViewSearch;
+    private ViewAllAdapter viewAllAdapter;
+
     //Home category
     List<HomeCategory> categoryList;
     HomeAdapter homeAdapter;
@@ -127,6 +142,67 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
+
+        /////////////////////Search view
+        recyclerViewSearch = root.findViewById(R.id.search_rec);
+        search_box = root.findViewById(R.id.search_box);
+        viewAllModelList = new ArrayList<>();
+        viewAllAdapter = new ViewAllAdapter(getContext(), viewAllModelList);
+
+        recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewSearch.setAdapter(viewAllAdapter);
+        recyclerViewSearch.setHasFixedSize(true);
+        search_box.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                if(s.toString().isEmpty()){
+                    viewAllModelList.clear();
+                    viewAllAdapter.notifyDataSetChanged();
+                }else{
+                    searchProduct(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(s.toString().isEmpty()){
+
+                    viewAllModelList.clear();
+                    viewAllAdapter.notifyDataSetChanged();
+                }else{
+                    Log.d("myTag", "This is my message");
+                    searchProduct(s.toString());
+                }
+            }
+        });
         return root;
+    }
+
+    private void searchProduct(String type){
+        if(!type.isEmpty()){
+            db.collection("AllProducts").whereEqualTo("type", type).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful() && task.getResult() != null){
+                                viewAllModelList.clear();
+                                viewAllAdapter.notifyDataSetChanged();
+                                for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                                    ViewAllModel viewAllModel = doc.toObject(ViewAllModel.class);
+                                    viewAllModelList.add(viewAllModel);
+                                    Log.d("Haha", "Finish");
+                                    viewAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
     }
 }

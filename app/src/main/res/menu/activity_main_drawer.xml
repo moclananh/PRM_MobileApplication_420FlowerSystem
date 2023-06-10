@@ -32,5 +32,9 @@
             android:id="@+id/nav_my_cart"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/my_cart" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Our Location" />
     </group>
 </menu>
