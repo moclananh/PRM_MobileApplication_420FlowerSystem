@@ -43,8 +43,13 @@
         android:label="@string/my_cart"
         tools:layout="@layout/fragment_my_cart" />
     <fragment
+        android:id="@+id/nav_view_all"
+        android:name="fpt.edu.vn.a420flowershop.ui.viewall.ViewAllFragment"
+        android:label="fragment_nav_view_all"
+        tools:layout="@layout/fragment_nav_view_all" />
+    <fragment
         android:id="@+id/nav_map"
         android:name="fpt.edu.vn.a420flowershop.ui.map.MapFragment"
-        android:label="fragment_map"
+        android:label="MAP"
         tools:layout="@layout/fragment_map" />
 </navigation>
