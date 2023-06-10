@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import fpt.edu.vn.a420flowershop.Models.UserModel;
+import fpt.edu.vn.a420flowershop.Activities.AdminActivities.AdminManageActivity;
 import fpt.edu.vn.a420flowershop.R;
 
 public class LoginActivity extends AppCompatActivity {

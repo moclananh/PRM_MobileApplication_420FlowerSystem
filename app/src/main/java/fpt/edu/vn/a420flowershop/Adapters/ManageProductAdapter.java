@@ -1,0 +1,64 @@
+package fpt.edu.vn.a420flowershop.Adapters;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import fpt.edu.vn.a420flowershop.Models.ProductModel;
+import fpt.edu.vn.a420flowershop.R;
+
+public class ManageProductAdapter extends FirebaseRecyclerAdapter<ProductModel, ManageProductAdapter.allProductViewHolder> {
+
+   /**
+    * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
+    * {@link FirebaseRecyclerOptions} for configuration options.
+    *
+    * @param options
+    */
+   public ManageProductAdapter(@androidx.annotation.NonNull FirebaseRecyclerOptions<ProductModel> options) {
+      super(options);
+   }
+
+   @Override
+   protected void onBindViewHolder(@androidx.annotation.NonNull allProductViewHolder holder, int position, @androidx.annotation.NonNull ProductModel model) {
+       holder.product_name.setText(model.getProduct_name());
+       holder.product_price.setText(model.getProduct_price());
+       holder.product_cat.setText(model.getProduct_cat());
+       holder.product_stock.setText(model.getProduct_stock());
+       Glide.with(holder.product_img.getContext())
+               .load(model.getProduct_img())
+               .placeholder(R.drawable.ic_menu_camera)
+               .error(R.drawable.ic_menu_camera)
+               .into(holder.product_img);
+   }
+
+   @androidx.annotation.NonNull
+   @Override
+   public allProductViewHolder onCreateViewHolder(@androidx.annotation.NonNull ViewGroup parent, int viewType) {
+      View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.manage_product_item, parent,false);
+       return new allProductViewHolder(view);
+   }
+
+   class allProductViewHolder extends RecyclerView.ViewHolder{
+       TextView product_name, product_price, product_cat, product_stock;
+       ImageView product_img;
+       public allProductViewHolder(@NonNull View itemView){
+         super(itemView);
+          product_name = itemView.findViewById(R.id.manage_text_id);
+          product_price = itemView.findViewById(R.id.manage_price_id);
+          product_cat = itemView.findViewById(R.id.manage_cat_id);
+          product_stock = itemView.findViewById(R.id.manage_stock_id);
+          product_img = itemView.findViewById(R.id.manage_img_id);
+       }
+   }
+}

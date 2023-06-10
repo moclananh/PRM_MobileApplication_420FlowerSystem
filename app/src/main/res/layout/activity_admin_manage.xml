@@ -4,77 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.AdminManageActivity">
+    tools:context=".Activities.AdminActivities.AdminManageActivity">
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             tools:ignore="MissingConstraints">
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#00BCD4"
-                android:text="Manage Product"
-                android:textAlignment="center"
-                android:textColor="#0C0C0C"
-                android:textSize="34sp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rec_admin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:orientation="vertical"
                 tools:ignore="MissingConstraints">
-            </androidx.recyclerview.widget.RecyclerView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnBack"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:text="Back" />
-            <Button
-                android:id="@+id/btnAddNew"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:text="Add New" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#00BCD4"
+                    android:text="Manage Product"
+                    android:textAlignment="center"
+                    android:textColor="#0C0C0C"
+                    android:textSize="34sp" />
 
-            android:layout_weight="1"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/btnUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:text="Update" />
-
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:text="Delete" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rec_admin"
+                    android:layout_width="match_parent"
+                    android:layout_height="557dp"
+                    tools:ignore="MissingConstraints"></androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="406dp"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="1dp"
+        tools:ignore="MissingConstraints">
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="Logout" />
 
+        <Button
+            android:id="@+id/btnAddNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="Add New" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
