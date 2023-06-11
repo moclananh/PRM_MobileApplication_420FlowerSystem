@@ -10,12 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -33,6 +37,7 @@ import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import fpt.edu.vn.a420flowershop.Adapters.AllProductAdapter;
+import fpt.edu.vn.a420flowershop.Adapters.ManageProductAdapter;
 import fpt.edu.vn.a420flowershop.Adapters.NavCategoryAdapter;
 import fpt.edu.vn.a420flowershop.Models.NavCategoryModel;
 import fpt.edu.vn.a420flowershop.Models.ProductModel;
@@ -47,11 +52,6 @@ import java.util.List;
 
 import fpt.edu.vn.a420flowershop.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ViewAllFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 
 public class ViewAllFragment extends Fragment {
 
@@ -89,4 +89,37 @@ public class ViewAllFragment extends Fragment {
         super.onStop();
         allProductAdapter.stopListening();
     }
+    //menu search nhma dang bi loi menu setting ghi de
+/*
+    @Override
+    public final void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+
+        inflater.inflate(R.menu.search_product, menu);
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                txtSearch(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                txtSearch(query);
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    //get product by keyword
+    private void txtSearch( String txt){
+        FirebaseRecyclerOptions<ProductModel> options = new FirebaseRecyclerOptions.Builder<ProductModel>()
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("products").orderByChild("product_name").startAt(txt).endAt(txt+"~"), ProductModel.class)
+                .build();
+        allProductAdapter = new AllProductAdapter(options);
+        allProductAdapter.startListening();
+        recyclerView.setAdapter(allProductAdapter);
+    }*/
 }
