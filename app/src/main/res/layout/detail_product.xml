@@ -172,36 +172,42 @@
     </LinearLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="11dp"
         android:layout_marginTop="30dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/relativeLayout">
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
 
         <ImageView
             android:id="@+id/add_item"
             android:layout_width="54dp"
             android:layout_height="54dp"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/baseline_add_circle_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/relativeLayout" />
+             />
 
-        <TextView
-            android:id="@+id/quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="7dp"
-            android:text="1"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/add_item"
-            app:layout_constraintTop_toTopOf="@+id/relativeLayout" />
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="7dp"
+        android:text="1"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/add_item" />
 
         <ImageView
             android:id="@+id/remove_item"
@@ -216,9 +222,7 @@
             android:id="@+id/add_to_cart"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-
-
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="60dp"
             android:background="@drawable/btn_bg_detailed"
             android:text="Add To Cart"
             android:textColor="@color/white"
@@ -228,4 +232,6 @@
     </LinearLayout>
 
 </LinearLayout>
+
+
 
