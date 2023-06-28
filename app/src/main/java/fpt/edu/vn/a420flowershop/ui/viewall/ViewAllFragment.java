@@ -58,12 +58,13 @@ public class ViewAllFragment extends Fragment {
     FirebaseDatabase database;
     RecyclerView recyclerView;
     AllProductAdapter allProductAdapter;
+    EditText search_product;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_nav_view_all, container, false);
 
-
+        search_product = root.findViewById(R.id.search_product_user);
         database = FirebaseDatabase.getInstance();
         recyclerView = root.findViewById(R.id.rec_all_product_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
@@ -74,8 +75,24 @@ public class ViewAllFragment extends Fragment {
                 .build();
         allProductAdapter = new AllProductAdapter(options);
         recyclerView.setAdapter(allProductAdapter);
-
+        search_click();
         return root;
+    }
+
+    public void search_click(){
+        search_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String txt = search_product.getText().toString();
+
+                FirebaseRecyclerOptions<ProductModel> options = new FirebaseRecyclerOptions.Builder<ProductModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("products").orderByChild("product_name").startAt(txt).endAt(txt + "\uf8ff"), ProductModel.class) //startAt("%"+txt+"%").endAt(txt+"~")
+                        .build();
+                allProductAdapter = new AllProductAdapter(options);
+                allProductAdapter.startListening();
+                recyclerView.setAdapter(allProductAdapter);
+            }
+        });
     }
 
     @Override
@@ -89,8 +106,7 @@ public class ViewAllFragment extends Fragment {
         super.onStop();
         allProductAdapter.stopListening();
     }
-    //menu search nhma dang bi loi menu setting ghi de
-/*
+   /* //menu search nhma dang bi loi menu setting ghi de
     @Override
     public final void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 

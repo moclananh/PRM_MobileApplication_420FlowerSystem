@@ -106,7 +106,6 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<ProductModel, All
        RecyclerView recyclerView;
        TextView product_name, product_price, product_cat, product_stock;
        ImageView product_img;
-       EditText search;
        public allProductViewHolder(@NonNull View itemView){
          super(itemView);
           product_name = itemView.findViewById(R.id.text_id);
@@ -114,7 +113,6 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<ProductModel, All
           product_cat = itemView.findViewById(R.id.cat_id);
           product_stock = itemView.findViewById(R.id.stock_id);
           product_img = itemView.findViewById(R.id.img_id);
-          search = itemView.findViewById(R.id.search_product_user);
           btn_view_detail = itemView.findViewById(R.id.btn_view_detail);
        }
 
