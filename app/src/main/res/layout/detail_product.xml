@@ -196,18 +196,18 @@
             app:layout_constraintStart_toStartOf="parent"
              />
 
-    <TextView
-        android:id="@+id/quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="7dp"
-        android:text="1"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/add_item" />
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="11dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="7dp"
+            android:text="1"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/add_item" />
 
         <ImageView
             android:id="@+id/remove_item"
