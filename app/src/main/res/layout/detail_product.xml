@@ -198,13 +198,13 @@
 
         <TextView
             android:id="@+id/quantity"
-            android:layout_width="11dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="6dp"
             android:text="1"
-            android:textSize="30sp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/add_item" />

@@ -1,6 +1,8 @@
 package fpt.edu.vn.a420flowershop.Models;
 
-public class ProductModel {
+import java.io.Serializable;
+
+public class ProductModel  {
     String product_name, product_price, product_cat, product_img, product_stock, product_des, product_status;
 
     public ProductModel() {

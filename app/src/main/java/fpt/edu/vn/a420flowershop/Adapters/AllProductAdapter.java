@@ -16,15 +16,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Objects;
+
+import fpt.edu.vn.a420flowershop.Activities.AdminActivities.AddNewProductActivity;
 import fpt.edu.vn.a420flowershop.Activities.DetailedActivity;
 import fpt.edu.vn.a420flowershop.Activities.ViewAllActivity;
 import fpt.edu.vn.a420flowershop.Models.ProductModel;
+import fpt.edu.vn.a420flowershop.Models.ViewAllModel;
 import fpt.edu.vn.a420flowershop.R;
 
 public class AllProductAdapter extends FirebaseRecyclerAdapter<ProductModel, AllProductAdapter.allProductViewHolder> {
@@ -36,6 +50,10 @@ public class AllProductAdapter extends FirebaseRecyclerAdapter<ProductModel, All
     * @param options
     */
 int totalQuantity;
+int totalPrice;
+FirebaseFirestore firestore;
+FirebaseAuth auth;
+
    public AllProductAdapter(@androidx.annotation.NonNull FirebaseRecyclerOptions<ProductModel> options) {
       super(options);
    }
@@ -96,7 +114,8 @@ int totalQuantity;
        TextView stock = view.findViewById(R.id.pro_stock_id_detail);
        TextView price = view.findViewById(R.id.pro_price_id_detail);
        TextView des = view.findViewById(R.id.pro_des_id_detail);
-
+       firestore = FirebaseFirestore.getInstance();
+       auth = FirebaseAuth.getInstance();
 
        Button add_to_cart = view.findViewById(R.id.add_to_cart);
        ImageView incre = view.findViewById(R.id.add_item);
@@ -104,6 +123,7 @@ int totalQuantity;
        TextView quantity = view.findViewById(R.id.quantity);
 
        totalQuantity = 1;
+
        name.setText(model.getProduct_name());
        category.setText(model.getProduct_cat());
 
@@ -128,12 +148,13 @@ int totalQuantity;
            @Override
            public void onClick(View v) {
               if (totalQuantity >= quantityInStock){
-                  Toast.makeText(holder.product_name.getContext(), "Deo co du hang", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(holder.product_name.getContext(), "Exceed products in stock", Toast.LENGTH_SHORT).show();
               }
               else {
                   totalQuantity+=1;
-                  Toast.makeText(holder.product_name.getContext(), "Add Successs"+totalQuantity, Toast.LENGTH_SHORT).show();
                   quantity.setText(String.valueOf(totalQuantity));
+                  int productPrice = Integer.parseInt(model.getProduct_price());
+                  totalPrice = productPrice * totalQuantity;
               }
            }
        });
@@ -142,23 +163,68 @@ int totalQuantity;
            @Override
            public void onClick(View v) {
 
-               if (totalQuantity >= 0){
-                   Toast.makeText(holder.product_name.getContext(), "DEO DC SUB NUA", Toast.LENGTH_SHORT).show();
+               if (totalQuantity < 0){
+                   Toast.makeText(holder.product_name.getContext(), "Quantity must higher 0", Toast.LENGTH_SHORT).show();
 
                }
                else {
                    totalQuantity-=1;
-                   Toast.makeText(holder.product_name.getContext(), "Sub Successs"+totalQuantity, Toast.LENGTH_SHORT).show();
                    quantity.setText(String.valueOf(totalQuantity));
+                   int productPrice = Integer.parseInt(model.getProduct_price());
+                   totalPrice = productPrice * totalQuantity;
                }
            }
        });
+       int productPrice = Integer.parseInt(model.getProduct_price());
+       totalPrice = productPrice * totalQuantity;
 
        add_to_cart.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               String saveCurrentDate, saveCurrentTime;
+               Calendar calForDate = Calendar.getInstance();
 
+               SimpleDateFormat currentDate = new SimpleDateFormat();
+               saveCurrentDate = currentDate.format(calForDate.getTime());
+
+               SimpleDateFormat currentTime = new SimpleDateFormat();
+               saveCurrentTime = currentTime.format(calForDate.getTime());
+
+               final HashMap<String, Object> cartMap = new HashMap<>();
+               cartMap.put("productName",model.getProduct_name());
+               cartMap.put("productPrice", price.getText().toString());
+               cartMap.put("currentDate", saveCurrentDate);
+               cartMap.put("currentTime", saveCurrentTime);
+               cartMap.put("totalQuantity", quantity.getText().toString());
+               cartMap.put("totalPrice",totalPrice);
+
+              firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                      .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                          @Override
+                          public void onComplete(@androidx.annotation.NonNull Task<DocumentReference> task) {
+                              Toast.makeText(holder.product_name.getContext(), "Add success", Toast.LENGTH_SHORT).show();
+                          }
+                      });
+//               FirebaseDatabase.getInstance().getReference().child("carts")
+//                       .push()
+//                       .setValue(cartMap)
+//                       .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                           @Override
+//                           public void onSuccess(Void unused) {
+//                               Toast.makeText(holder.product_name.getContext(), "Data inserted", Toast.LENGTH_SHORT).show();
+//                           }
+//                       })
+//                       .addOnFailureListener(new OnFailureListener() {
+//                           @Override
+//                           public void onFailure(@androidx.annotation.NonNull Exception e) {
+//                               Toast.makeText(holder.product_name.getContext(), "Insert error!! ", Toast.LENGTH_SHORT).show();
+//                           }
+//                       });
            }
        });
+
    }
+
+
+
 }
