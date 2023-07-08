@@ -62,7 +62,8 @@ public class AddNewProductActivity extends AppCompatActivity {
                 isAllFieldsChecked = CheckAllFields();
                 if (isAllFieldsChecked) {
                     insertData();
-                    clearContent();
+                    Intent intent = new Intent(AddNewProductActivity.this, AdminManageActivity.class);
+                    startActivity(intent);
                 }
 
             }
@@ -146,13 +147,5 @@ public class AddNewProductActivity extends AppCompatActivity {
                 });
     }
 
-    private void clearContent(){
-        product_name.setText("");
-        product_price.setText("");
-        product_cat.setText("");
-        product_img.setText("");
-        product_stock.setText("");
-        product_des.setText("");
-        product_status.setText("");
-    }
+
 }

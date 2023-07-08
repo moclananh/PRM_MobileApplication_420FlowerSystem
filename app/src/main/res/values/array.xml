@@ -3,8 +3,8 @@
     <string-array name="spinnerItems">
         <item>LoveFlower</item>
         <item>BirthdayFlower</item>
-        <item>item3</item>
-        <item>item4</item>
+        <item>CongratulationFlower</item>
+        <item>CondolenceFlower</item>
     </string-array>
 
     <string-array name="spinnerStatus">
