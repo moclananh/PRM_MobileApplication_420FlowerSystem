@@ -76,14 +76,19 @@
                 android:layout_weight="1"
                 android:text="Category:"
                 android:textSize="24sp" />
-            <EditText
-                android:id="@+id/pro_cat_id"
+<!--            <EditText-->
+<!--                android:id="@+id/pro_cat_id"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ems="10"-->
+<!--                android:inputType="text"-->
+<!--                android:textSize="18sp" />-->
+            <Spinner
+                android:id="@+id/spinner"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="text"
-                android:textSize="18sp" />
+                android:layout_height="match_parent"
+                android:entries="@array/spinnerItems"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -162,14 +167,20 @@
                 android:layout_weight="1"
                 android:text="Status:"
                 android:textSize="24sp" />
-            <EditText
+            <!--<EditText
                 android:id="@+id/pro_status_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="text"
-                android:textSize="18sp" />
+                android:textSize="18sp" />-->
+
+            <Spinner
+                android:id="@+id/spinnerStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/spinnerStatus"/>
         </LinearLayout>
 
         <LinearLayout

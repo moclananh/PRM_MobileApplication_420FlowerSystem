@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.Display;
 import android.view.View;
@@ -20,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import fpt.edu.vn.a420flowershop.Models.UserModel;
 import fpt.edu.vn.a420flowershop.R;
 
@@ -29,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     ProgressBar progressBar;
+    boolean isAllFieldsChecked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +75,12 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUser();
-                progressBar.setVisibility(View.VISIBLE);
+                isAllFieldsChecked = CheckAllFields();
+                if (isAllFieldsChecked) {
+                    createUser();
+                    progressBar.setVisibility(View.VISIBLE);
+                }
+
             }
         });
 
@@ -79,37 +88,13 @@ public class RegisterActivity extends AppCompatActivity {
 
    Boolean isAdmin = false;
     private void createUser() {
-        String userName = username.getText().toString();
-        String userPhone = phone.getText().toString();
-        String userEmail = email.getText().toString();
-        String userPassword = password.getText().toString();
-        String userRePassword = re_password.getText().toString();
+        String userName = username.getText().toString().trim();
+        String userPhone = phone.getText().toString().trim();
+        String userEmail = email.getText().toString().trim();
+        String userPassword = password.getText().toString().trim();
+        String userRePassword = re_password.getText().toString().trim();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         Boolean userIsAdmin = isAdmin;
-
-        if (TextUtils.isEmpty((userName))) {
-            Toast.makeText(this, "Username is not empty!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty((userEmail))) {
-            Toast.makeText(this, "Email Number is not empty!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty((userPassword))) {
-            Toast.makeText(this, "Password is not empty!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty((userRePassword))) {
-            Toast.makeText(this, "Re-password is not empty!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if(!TextUtils.equals(userPassword, userRePassword)){
-            Toast.makeText(this, "Password does not match!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (userPassword.length() < 6) {
-            Toast.makeText(this, "Password length must > 6!", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         // create user
         auth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -121,12 +106,74 @@ public class RegisterActivity extends AppCompatActivity {
                     String id = task.getResult().getUser().getUid();
                     database.getReference().child("Users").child(id).setValue(user);
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(RegisterActivity.this, "Register successfull", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Register successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(RegisterActivity.this, "Register fail, error: " + task.getException(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    public boolean isValidPhoneNumber(String phoneNumber) {
+        // Define the regex pattern for a phone number
+        String regexPattern = "^[+]?[0-9]{10,13}$";
+
+        // Create a Pattern object
+        Pattern pattern = Pattern.compile(regexPattern);
+
+        // Create a Matcher object
+        Matcher matcher = pattern.matcher(phoneNumber);
+
+        // Perform the matching and return the result
+        return matcher.matches();
+    }
+
+    private boolean CheckAllFields() {
+        String userName = username.getText().toString().trim();
+        String userPhone = phone.getText().toString().trim();
+        String userEmail = email.getText().toString().trim();
+        String userPassword = password.getText().toString().trim();
+        String userRePassword = re_password.getText().toString().trim();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String phonePattern = "/^0[1-9]\\d{8,10}$/";
+
+        if (userName.isEmpty()) {
+            username.setError("This field is required");
+            return false;
+        }
+
+        if (userPhone.isEmpty()) {
+            phone.setError("This field is required");
+            return false;
+        } else if (!userPhone.isEmpty() && !isValidPhoneNumber(userPhone)) {
+            phone.setError("Only phone number input allowed");
+            return false;
+        }
+
+        if (userEmail.isEmpty()) {
+            email.setError("This field is required");
+            return false;
+        } else if (!userEmail.isEmpty() && !userEmail.matches(emailPattern)) {
+            email.setError("Only email input allowed");
+            return false;
+        }
+
+        if (userPassword.isEmpty()) {
+            password.setError("This field is required");
+            return false;
+        } else if (userPassword.length() <= 6){
+            password.setError("Password length must > 6");
+        }
+
+        if (userRePassword.isEmpty()){
+            re_password.setError("This field is required");
+            return false;
+        } else if (!TextUtils.equals(userPassword, userRePassword)) {
+            re_password.setError("Re-Password does not match above password");
+            return false;
+        }
+
+        return true;
     }
 }

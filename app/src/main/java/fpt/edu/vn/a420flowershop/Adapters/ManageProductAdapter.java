@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.orhanobut.dialogplus.ViewHolder;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,50 +69,86 @@ public class ManageProductAdapter extends FirebaseRecyclerAdapter<ProductModel, 
                // read old data
                View view = dialogPlus.getHolderView();
                EditText name = view.findViewById(R.id.pro_name_id_update);
-               EditText category = view.findViewById(R.id.pro_cat_id_update);
+//               EditText category = view.findViewById(R.id.pro_cat_id_update);
                EditText img = view.findViewById(R.id.pro_img_id_update);
                EditText stock = view.findViewById(R.id.pro_stock_id_update);
                EditText price = view.findViewById(R.id.pro_price_id_update);
                EditText des = view.findViewById(R.id.pro_des_id_update);
-               EditText status = view.findViewById(R.id.pro_status_id_update);
+//               EditText status = view.findViewById(R.id.pro_status_id_update);
+               Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
+               Spinner spinnerStatus = (Spinner) view.findViewById(R.id.spinnerStatus);
+
+
 
                Button btn_update = view.findViewById(R.id.btnUpdate_confirm);
-
+               String[] categoryArray = view.getResources().getStringArray(R.array.spinnerItems);
+               String[] statusArray = view.getResources().getStringArray(R.array.spinnerStatus);
                name.setText(model.getProduct_name());
-               category.setText(model.getProduct_cat());
+               spinner.setSelection(Arrays.asList(categoryArray).indexOf(model.getProduct_cat()));
                img.setText(model.getProduct_img());
                stock.setText(model.getProduct_stock());
                price.setText(model.getProduct_price());
                des.setText(model.getProduct_des());
-               status.setText(model.getProduct_status());
+               spinnerStatus.setSelection(Arrays.asList(statusArray).indexOf(model.getProduct_status()));
 
                btn_update.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
                        Map<String, Object> map = new HashMap<>();
-                       map.put("product_name", name.getText().toString());
-                       map.put("product_cat", category.getText().toString());
-                       map.put("product_stock", stock.getText().toString());
-                       map.put("product_price", price.getText().toString());
-                       map.put("product_des", des.getText().toString());
-                       map.put("product_status", status.getText().toString());
+                       String inputProductName = name.getText().toString().trim();
+                       String inputProductPrice = price.getText().toString().trim();
+                       String inputProductImg = img.getText().toString().trim();
+                       String inputProductStock = stock.getText().toString().trim();
+                       String inputProductDes = des.getText().toString().trim();
+                       if (inputProductName.isEmpty()) {
+                           name.setError("This field is required");
 
-                       FirebaseDatabase.getInstance().getReference().child("products")
-                               .child(getRef(position).getKey()).updateChildren(map)
-                               .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                   @Override
-                                   public void onSuccess(Void unused) {
-                                       Toast.makeText(holder.product_name.getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
-                                       dialogPlus.dismiss(); // after update close table update detail
-                                   }
-                               })
-                               .addOnFailureListener(new OnFailureListener() {
-                                   @Override
-                                   public void onFailure( Exception e) {
-                                       Toast.makeText(holder.product_name.getContext(), "Update failed", Toast.LENGTH_SHORT).show();
-                                       dialogPlus.dismiss();
-                                   }
-                               });
+                       }
+
+                       else if (inputProductPrice.isEmpty()) {
+                           price.setError("This field is required");
+
+                       } else if (!inputProductPrice.isEmpty() && !inputProductPrice.matches("\\d+")) {
+                           price.setError("Only numeric input allowed");
+
+                       }
+                       else if (inputProductImg.isEmpty()) {
+                           img.setError("This field is required");
+                       }
+                       else if (inputProductStock.isEmpty()) {
+                           stock.setError("This field is required");
+                       } else if (!inputProductStock.isEmpty() && !inputProductStock.matches("\\d+")) {
+                           stock.setError("Only numeric input allowed");
+                       }
+                       else if (inputProductDes.isEmpty()) {
+                           des.setError("This field is required");
+                       }
+                        else {
+                           map.put("product_name", name.getText().toString());
+                           map.put("product_cat", spinner.getSelectedItem().toString());
+                           map.put("product_stock", stock.getText().toString());
+                           map.put("product_price", price.getText().toString());
+                           map.put("product_des", des.getText().toString());
+                           map.put("product_status", spinnerStatus.getSelectedItem().toString());
+
+                           FirebaseDatabase.getInstance().getReference().child("products")
+                                   .child(getRef(position).getKey()).updateChildren(map)
+                                   .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                       @Override
+                                       public void onSuccess(Void unused) {
+                                           Toast.makeText(holder.product_name.getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                                           dialogPlus.dismiss(); // after update close table update detail
+                                       }
+                                   })
+                                   .addOnFailureListener(new OnFailureListener() {
+                                       @Override
+                                       public void onFailure( Exception e) {
+                                           Toast.makeText(holder.product_name.getContext(), "Update failed", Toast.LENGTH_SHORT).show();
+                                           dialogPlus.dismiss();
+                                       }
+                                   });
+                       }
+
                    }
                });
            }
@@ -139,6 +177,8 @@ public class ManageProductAdapter extends FirebaseRecyclerAdapter<ProductModel, 
                builder.show();
            }
        });
+
+
    }
 
    @androidx.annotation.NonNull
