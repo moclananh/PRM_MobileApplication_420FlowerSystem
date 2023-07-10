@@ -102,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
 
-                    UserModel user = new UserModel(userName, userEmail, userPhone, userPassword, userRePassword,"Null","Null", isAdmin);
+                    UserModel user = new UserModel(userName, userEmail, userPhone, userPassword, userRePassword,"https://firebasestorage.googleapis.com/v0/b/flowershop-339a3.appspot.com/o/profile_picture%2Fa2AYaOvpzoRO6z17M739OOjVUR33?alt=media&token=950381f3-2529-4772-9cdf-0ea64cf0d0e6","", isAdmin);
                     String id = task.getResult().getUser().getUid();
                     database.getReference().child("Users").child(id).setValue(user);
                     progressBar.setVisibility(View.GONE);

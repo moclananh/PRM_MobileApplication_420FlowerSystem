@@ -38,6 +38,9 @@ import com.google.firebase.storage.UploadTask;
 import java.io.Console;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import fpt.edu.vn.a420flowershop.Activities.AdminActivities.AddNewProductActivity;
+import fpt.edu.vn.a420flowershop.Activities.AdminActivities.AdminManageActivity;
+import fpt.edu.vn.a420flowershop.Activities.MainActivity;
 import fpt.edu.vn.a420flowershop.Models.UserModel;
 import fpt.edu.vn.a420flowershop.R;
 
@@ -114,6 +117,8 @@ public class profileFragment extends Fragment {
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                 .child("address").setValue(address.getText().toString());
         Toast.makeText(getContext(), "Profile Updating", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
