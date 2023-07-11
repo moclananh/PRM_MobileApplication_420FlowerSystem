@@ -1,12 +1,9 @@
 package fpt.edu.vn.a420flowershop.Adapters;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,11 +14,8 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.orhanobut.dialogplus.DialogPlus;
@@ -32,13 +26,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Objects;
 
-import fpt.edu.vn.a420flowershop.Activities.AdminActivities.AddNewProductActivity;
-import fpt.edu.vn.a420flowershop.Activities.DetailedActivity;
-import fpt.edu.vn.a420flowershop.Activities.ViewAllActivity;
 import fpt.edu.vn.a420flowershop.Models.ProductModel;
-import fpt.edu.vn.a420flowershop.Models.ViewAllModel;
 import fpt.edu.vn.a420flowershop.R;
 
 public class AllProductAdapter extends FirebaseRecyclerAdapter<ProductModel, AllProductAdapter.allProductViewHolder> {

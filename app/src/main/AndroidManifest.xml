@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.420FlowerShop"
         tools:targetApi="31">
@@ -21,10 +21,6 @@
         <activity
             android:name=".Activities.AdminActivities.AdminManageActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activities.DetailedActivity"
-            android:exported="false"
-            android:theme="@style/Theme.420FlowerShop.NoActionBar" />
         <activity
             android:name=".Activities.MainActivity"
             android:exported="false"
@@ -42,10 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activities.ViewAllActivity"
-            android:exported="false"
-            android:theme="@style/Theme.420FlowerShop.NoActionBar" />
     </application>
 
 </manifest>

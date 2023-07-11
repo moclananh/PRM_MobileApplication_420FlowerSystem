@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 
 import fpt.edu.vn.a420flowershop.Models.MyCartModel;
+import fpt.edu.vn.a420flowershop.Models.ProductModel;
 import fpt.edu.vn.a420flowershop.R;
 
 
@@ -34,6 +35,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
     int totalPrice = 0;
     FirebaseFirestore firestore;
     FirebaseAuth auth;
+    ProductModel model;
 
     public MyCartAdapter(Context context, List<MyCartModel> cartModelList) {
         this.context = context;
