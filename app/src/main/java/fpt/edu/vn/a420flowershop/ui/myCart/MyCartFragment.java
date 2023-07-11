@@ -46,7 +46,6 @@ public class MyCartFragment extends Fragment {
     MyCartAdapter cartAdapter;
     List<MyCartModel> cartModelList;
     Button buyNow;
-    ProductModel model;
 
     public MyCartFragment() {
         // Required empty public constructor
