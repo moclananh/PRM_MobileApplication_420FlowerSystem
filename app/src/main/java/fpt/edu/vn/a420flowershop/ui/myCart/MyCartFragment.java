@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,13 +25,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import fpt.edu.vn.a420flowershop.Activities.PlacedOrderActivity;
 import fpt.edu.vn.a420flowershop.Adapters.MyCartAdapter;
 import fpt.edu.vn.a420flowershop.Models.MyCartModel;
+import fpt.edu.vn.a420flowershop.Models.ProductModel;
 import fpt.edu.vn.a420flowershop.R;
 
 public class MyCartFragment extends Fragment {
@@ -39,6 +45,8 @@ public class MyCartFragment extends Fragment {
     RecyclerView recyclerView;
     MyCartAdapter cartAdapter;
     List<MyCartModel> cartModelList;
+    Button buyNow;
+    ProductModel model;
 
     public MyCartFragment() {
         // Required empty public constructor
@@ -54,7 +62,7 @@ public class MyCartFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         overTotalAmount = root.findViewById(R.id.textView2);
-
+        buyNow = root.findViewById(R.id.buy_now);
 
         cartModelList = new ArrayList<>();
         cartAdapter = new MyCartAdapter(getActivity(), cartModelList);
@@ -76,7 +84,31 @@ public class MyCartFragment extends Fragment {
                 }
             }
         });
+        buyNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //pass data qua order
+                Intent intent = new Intent(getContext(), PlacedOrderActivity.class);
+                intent.putExtra("itemList", (Serializable) cartModelList);
+                startActivity(intent);
+                //xoa sp trong cart
+                db.collection("AddToCart")
+                        .document(auth.getCurrentUser().getUid())
+                        .collection("CurrentUser")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        document.getReference().delete();
+                                    }
+                                }
+                            }
+                        });
 
+            }
+        });
         return root;
     }
 
