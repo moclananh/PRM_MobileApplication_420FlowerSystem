@@ -70,22 +70,23 @@
             app:layout_constraintBottom_toTopOf="@+id/buy_now"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.461"
-            app:layout_constraintVertical_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buy_now"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:background="@drawable/btn_bg_detailed"
             android:text="Buy Now"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="10dp"/>
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

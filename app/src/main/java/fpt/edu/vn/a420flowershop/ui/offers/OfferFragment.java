@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import fpt.edu.vn.a420flowershop.R;
 
 public class OfferFragment extends Fragment {
+
     public OfferFragment() {
         // Required empty public constructor
     }

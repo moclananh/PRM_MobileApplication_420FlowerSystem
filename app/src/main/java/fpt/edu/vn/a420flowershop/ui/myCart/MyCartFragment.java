@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import fpt.edu.vn.a420flowershop.Activities.LoginActivity;
 import fpt.edu.vn.a420flowershop.Activities.PlacedOrderActivity;
 import fpt.edu.vn.a420flowershop.Adapters.MyCartAdapter;
 import fpt.edu.vn.a420flowershop.Models.MyCartModel;
@@ -62,7 +63,6 @@ public class MyCartFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         overTotalAmount = root.findViewById(R.id.textView2);
         buyNow = root.findViewById(R.id.buy_now);
-
         cartModelList = new ArrayList<>();
         cartAdapter = new MyCartAdapter(getActivity(), cartModelList);
         recyclerView.setAdapter(cartAdapter);
@@ -90,22 +90,6 @@ public class MyCartFragment extends Fragment {
                 Intent intent = new Intent(getContext(), PlacedOrderActivity.class);
                 intent.putExtra("itemList", (Serializable) cartModelList);
                 startActivity(intent);
-                //xoa sp trong cart
-                db.collection("AddToCart")
-                        .document(auth.getCurrentUser().getUid())
-                        .collection("CurrentUser")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        document.getReference().delete();
-                                    }
-                                }
-                            }
-                        });
-
             }
         });
         return root;

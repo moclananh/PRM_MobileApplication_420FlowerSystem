@@ -40,6 +40,7 @@ import java.io.Console;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fpt.edu.vn.a420flowershop.Activities.AdminActivities.AddNewProductActivity;
 import fpt.edu.vn.a420flowershop.Activities.AdminActivities.AdminManageActivity;
+import fpt.edu.vn.a420flowershop.Activities.LoginActivity;
 import fpt.edu.vn.a420flowershop.Activities.MainActivity;
 import fpt.edu.vn.a420flowershop.Models.UserModel;
 import fpt.edu.vn.a420flowershop.R;
@@ -72,15 +73,16 @@ public class profileFragment extends Fragment {
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    UserModel userModel= snapshot.getValue(UserModel.class);
+                UserModel userModel = snapshot.getValue(UserModel.class);
 
-                    name.setText(userModel.getUsername());
-                    email.setText(userModel.getEmail());
-                    number.setText(userModel.getPhone());
-                    address.setText(userModel.getAddress());
-                    Glide.with(getContext()).load(userModel.getProfileImg()).into(profileImg);
+                name.setText(userModel.getUsername());
+                email.setText(userModel.getEmail());
+                number.setText(userModel.getPhone());
+                address.setText(userModel.getAddress());
+                Glide.with(getContext()).load(userModel.getProfileImg()).into(profileImg);
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -98,18 +100,17 @@ public class profileFragment extends Fragment {
             }
         });
 
-        update.setOnClickListener(new View.OnClickListener(){
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateUserProfile();
             }
         });
 
-
         return root;
     }
 
-    private void updateUserProfile(){
+    private void updateUserProfile() {
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                 .child("username").setValue(name.getText().toString());
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
@@ -122,10 +123,10 @@ public class profileFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode,int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode,data);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if(data.getData() != null){
+        if (data.getData() != null) {
             Uri profileUri = data.getData();
             profileImg.setImageURI(profileUri);
 
@@ -148,6 +149,10 @@ public class profileFragment extends Fragment {
                     });
                 }
             });
+
         }
+
     }
+
+
 }
