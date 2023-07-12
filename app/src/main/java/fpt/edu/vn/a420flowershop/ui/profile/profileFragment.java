@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +51,7 @@ public class profileFragment extends Fragment {
     CircleImageView profileImg;
     EditText name, email, number, address;
     Button update;
-
+    ImageButton userLogout;
     FirebaseStorage storage;
     FirebaseAuth auth;
     FirebaseDatabase database;
@@ -63,6 +64,8 @@ public class profileFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
 
+        //logout
+        userLogout = root.findViewById(R.id.userLogout);
         profileImg = root.findViewById(R.id.profile_img);
         name = root.findViewById(R.id.profile_name);
         email = root.findViewById(R.id.profile_email);
@@ -107,6 +110,8 @@ public class profileFragment extends Fragment {
             }
         });
 
+        //logout
+        click_logout();
         return root;
     }
 
@@ -154,5 +159,13 @@ public class profileFragment extends Fragment {
 
     }
 
-
+    private void click_logout(){
+        userLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }
