@@ -109,7 +109,6 @@ public class profileFragment extends Fragment {
                 updateUserProfile();
             }
         });
-
         //logout
         click_logout();
         return root;
@@ -156,7 +155,6 @@ public class profileFragment extends Fragment {
             });
 
         }
-
     }
 
     private void click_logout(){
@@ -168,4 +166,6 @@ public class profileFragment extends Fragment {
             }
         });
     }
+
+
 }
