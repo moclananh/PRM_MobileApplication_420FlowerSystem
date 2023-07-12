@@ -164,6 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else if (userPassword.length() <= 6){
             password.setError("Password length must > 6");
+            return false;
         }
 
         if (userRePassword.isEmpty()){
