@@ -1,5 +1,6 @@
 package fpt.edu.vn.a420flowershop.ui.myCart;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,13 @@ import fpt.edu.vn.a420flowershop.Adapters.MyCartAdapter;
 import fpt.edu.vn.a420flowershop.Models.MyCartModel;
 import fpt.edu.vn.a420flowershop.Models.ProductModel;
 import fpt.edu.vn.a420flowershop.R;
+
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
 
 public class MyCartFragment extends Fragment {
     FirebaseFirestore db;
@@ -92,6 +100,9 @@ public class MyCartFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+
+
         return root;
     }
 

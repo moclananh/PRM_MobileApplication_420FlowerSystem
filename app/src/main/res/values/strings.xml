@@ -1,4 +1,7 @@
 <resources>
+    <string name="channel_name">Chanel_1</string>
+    <string name="default_notification_channel_id">cart_notification_channel</string>
+    <string name="channel_description">This is chanel</string>
     <string name="app_name">420FlowerShop</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
