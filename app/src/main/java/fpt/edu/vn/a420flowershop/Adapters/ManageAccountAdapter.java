@@ -37,7 +37,7 @@ public class ManageAccountAdapter extends FirebaseRecyclerAdapter<UserModel, Man
 
     @Override
     protected void onBindViewHolder(@NonNull ManageAccountAdapter.allAccountViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull UserModel model) {
-        if (!model.getEmail().equals("admin@admin.com")){
+
             holder.username.setText(model.getUsername());
             holder.email.setText(model.getEmail());
             holder.address.setText(model.getAddress());
@@ -71,7 +71,6 @@ public class ManageAccountAdapter extends FirebaseRecyclerAdapter<UserModel, Man
                     builder.show();
                 }
             });
-        }
     }
 
     @NonNull
