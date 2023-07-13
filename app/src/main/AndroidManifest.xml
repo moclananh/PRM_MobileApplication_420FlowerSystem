@@ -22,7 +22,10 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
         <activity
-            android:name=".Activities.AdminActivities.AdminManageAccountActivity"
+            android:name=".Activities.AdminActivities.ManageAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.AdminActivities.AdminPageActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.PlacedOrderActivity"
@@ -31,7 +34,7 @@
             android:name=".Activities.AdminActivities.AddNewProductActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.AdminActivities.AdminManageActivity"
+            android:name=".Activities.AdminActivities.ManageProductActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"

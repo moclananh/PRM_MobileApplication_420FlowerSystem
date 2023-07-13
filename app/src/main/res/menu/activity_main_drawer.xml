@@ -6,39 +6,31 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_view_all"
-            android:icon="@drawable/baseline_home_24"
+            android:icon="@drawable/product_all"
             android:title="All Product" />
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/baseline_home_24"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/account_icon"
             android:title="@string/profile" />
         <item
             android:id="@+id/nav_category"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/cat_icon"
             android:title="@string/category" />
         <item
-            android:id="@+id/nav_offers"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/offers" />
-        <item
-            android:id="@+id/nav_new_product"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/new_product" />
-        <item
             android:id="@+id/nav_my_order"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/cart_icon"
             android:title="@string/my_order" />
         <item
             android:id="@+id/nav_my_cart"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/baseline_add_shopping_cart_24"
             android:title="@string/my_cart" />
         <item
             android:id="@+id/nav_map"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/location_icon"
             android:title="Our Location" />
     </group>
 </menu>

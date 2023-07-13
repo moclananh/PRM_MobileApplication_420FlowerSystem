@@ -23,16 +23,6 @@
         android:label="@string/category"
         tools:layout="@layout/fragment_category" />
     <fragment
-        android:id="@+id/nav_offers"
-        android:name="fpt.edu.vn.a420flowershop.ui.offers.OfferFragment"
-        android:label="@string/offers"
-        tools:layout="@layout/fragment_offer" />
-    <fragment
-        android:id="@+id/nav_new_product"
-        android:name="fpt.edu.vn.a420flowershop.ui.newProduct.newProductFragment"
-        android:label="@string/new_product"
-        tools:layout="@layout/fragment_new_product" />
-    <fragment
         android:id="@+id/nav_my_order"
         android:name="fpt.edu.vn.a420flowershop.ui.myOrder.MyOrderFragment"
         android:label="@string/my_order"

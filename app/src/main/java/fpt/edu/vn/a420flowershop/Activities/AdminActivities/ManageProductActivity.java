@@ -17,24 +17,22 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
 import fpt.edu.vn.a420flowershop.Activities.LoginActivity;
-import fpt.edu.vn.a420flowershop.Adapters.AllProductAdapter;
 import fpt.edu.vn.a420flowershop.Adapters.ManageProductAdapter;
 import fpt.edu.vn.a420flowershop.Models.ProductModel;
 import fpt.edu.vn.a420flowershop.R;
 
-public class AdminManageActivity extends AppCompatActivity {
-    Button btn_logout, btn_add_new, btn_manage_acc;
+public class ManageProductActivity extends AppCompatActivity {
+    Button btn_back, btn_add_new;
     RecyclerView recyclerView;
     ManageProductAdapter manageProductAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_manage);
+        setContentView(R.layout.activity_product_manage);
         init_view();
         loadData();
         click_add();
-        click_logout();
-        click_Manage_Account();
+        click_back();
     }
 
     private void loadData(){
@@ -51,35 +49,25 @@ public class AdminManageActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rec_admin);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //button
-        btn_logout = findViewById(R.id.btnLogout);
+        btn_back = findViewById(R.id.btnProductBack);
         btn_add_new = findViewById(R.id.btnAddNew);
-        btn_manage_acc = findViewById(R.id.btnManageAccount);
     }
 
     private void click_add(){
         btn_add_new.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(AdminManageActivity.this, AddNewProductActivity.class));
+                startActivity(new Intent(ManageProductActivity.this, AddNewProductActivity.class));
             }
         });
     }
 
-    private void click_logout(){
-        btn_logout.setOnClickListener(new View.OnClickListener(){
+    private void click_back(){
+        btn_back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(AdminManageActivity.this, LoginActivity.class));
-                Toast.makeText(AdminManageActivity.this, "Logout!!!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void click_Manage_Account(){
-        btn_manage_acc.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(AdminManageActivity.this, AdminManageAccountActivity.class));
+                startActivity(new Intent(ManageProductActivity.this, AdminPageActivity.class));
+                Toast.makeText(ManageProductActivity.this, "Back to admin page!!!", Toast.LENGTH_SHORT).show();
             }
         });
     }

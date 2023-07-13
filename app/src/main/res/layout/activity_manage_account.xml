@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.AdminActivities.AdminManageAccountActivity">
+    tools:context=".Activities.AdminActivities.ManageAccountActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -54,27 +54,11 @@
         tools:layout_editor_absoluteX="1dp"
         tools:ignore="MissingConstraints">
         <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:text="Logout" />
-
-        <Button
-            android:id="@+id/btnAddNew"
+            android:id="@+id/btnAccountBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="Add New" />
-
-        <Button
-            android:id="@+id/btnManageProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:text="Manage Pro" />
+            android:text="Back" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

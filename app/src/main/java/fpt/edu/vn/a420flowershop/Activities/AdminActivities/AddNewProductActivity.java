@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,7 +60,7 @@ public class AddNewProductActivity extends AppCompatActivity {
                 isAllFieldsChecked = CheckAllFields();
                 if (isAllFieldsChecked) {
                     insertData();
-                    Intent intent = new Intent(AddNewProductActivity.this, AdminManageActivity.class);
+                    Intent intent = new Intent(AddNewProductActivity.this, ManageProductActivity.class);
                     startActivity(intent);
                 }
 
@@ -114,7 +112,7 @@ public class AddNewProductActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(AddNewProductActivity.this, AdminManageActivity.class));
+                startActivity(new Intent(AddNewProductActivity.this, ManageProductActivity.class));
             }
         });
     }

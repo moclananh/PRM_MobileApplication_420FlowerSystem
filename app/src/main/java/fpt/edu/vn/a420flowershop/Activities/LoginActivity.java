@@ -17,7 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import fpt.edu.vn.a420flowershop.Activities.AdminActivities.AdminManageActivity;
+import fpt.edu.vn.a420flowershop.Activities.AdminActivities.AdminPageActivity;
+import fpt.edu.vn.a420flowershop.Activities.AdminActivities.ManageProductActivity;
 import fpt.edu.vn.a420flowershop.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -85,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                     if (auth.getCurrentUser().getEmail().equals("admin@admin.com")){
-                        startActivity(new Intent(LoginActivity.this, AdminManageActivity.class));
+                        startActivity(new Intent(LoginActivity.this, AdminPageActivity.class));
                     }
                     else startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }

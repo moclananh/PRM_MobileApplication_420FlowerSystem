@@ -18,26 +18,22 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import fpt.edu.vn.a420flowershop.Activities.LoginActivity;
 import fpt.edu.vn.a420flowershop.Adapters.ManageAccountAdapter;
-import fpt.edu.vn.a420flowershop.Adapters.ManageProductAdapter;
-import fpt.edu.vn.a420flowershop.Models.ProductModel;
 import fpt.edu.vn.a420flowershop.Models.UserModel;
 import fpt.edu.vn.a420flowershop.R;
 
-public class AdminManageAccountActivity extends AppCompatActivity {
+public class ManageAccountActivity extends AppCompatActivity {
 
-    Button btn_logout, btn_add_new, btn_manage_pro;
+    Button btn_back;
     RecyclerView recyclerView;
     ManageAccountAdapter manageAccountAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_manage_account);
+        setContentView(R.layout.activity_manage_account);
         init_view();
         loadData();
-        click_add();
-        click_logout();
-        click_Manage_Product();
+        click_back();
     }
 
     private void loadData(){
@@ -53,35 +49,15 @@ public class AdminManageAccountActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recAccount_admin);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //button
-        btn_logout = findViewById(R.id.btnLogout);
-        btn_add_new = findViewById(R.id.btnAddNew);
-        btn_manage_pro = findViewById(R.id.btnManageProduct);
+        btn_back = findViewById(R.id.btnAccountBack);
     }
 
-    private void click_add(){
-        btn_add_new.setOnClickListener(new View.OnClickListener(){
+    private void click_back(){
+        btn_back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(AdminManageAccountActivity.this, AddNewProductActivity.class));
-            }
-        });
-    }
-
-    private void click_logout(){
-        btn_logout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(AdminManageAccountActivity.this, LoginActivity.class));
-                Toast.makeText(AdminManageAccountActivity.this, "Logout!!!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void click_Manage_Product(){
-        btn_manage_pro.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(AdminManageAccountActivity.this, AdminManageActivity.class));
+                startActivity(new Intent(ManageAccountActivity.this, AdminPageActivity.class));
+                Toast.makeText(ManageAccountActivity.this, "Back to admin page!!!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -97,7 +73,7 @@ public class AdminManageAccountActivity extends AppCompatActivity {
         manageAccountAdapter.stopListening();
     }
 
-    // search product
+    // search
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_product, menu);
