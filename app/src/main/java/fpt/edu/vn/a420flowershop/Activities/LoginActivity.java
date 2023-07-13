@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, "Login successfull", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                     if (auth.getCurrentUser().getEmail().equals("admin@admin.com")){
                         startActivity(new Intent(LoginActivity.this, AdminManageActivity.class));
                     }

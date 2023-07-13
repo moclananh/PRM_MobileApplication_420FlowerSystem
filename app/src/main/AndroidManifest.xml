@@ -22,6 +22,9 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
         <activity
+            android:name=".Activities.AdminActivities.AdminManageAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.PlacedOrderActivity"
             android:exported="false" />
         <activity

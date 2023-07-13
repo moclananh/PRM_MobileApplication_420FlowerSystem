@@ -17,50 +17,52 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
 import fpt.edu.vn.a420flowershop.Activities.LoginActivity;
-import fpt.edu.vn.a420flowershop.Adapters.AllProductAdapter;
+import fpt.edu.vn.a420flowershop.Adapters.ManageAccountAdapter;
 import fpt.edu.vn.a420flowershop.Adapters.ManageProductAdapter;
 import fpt.edu.vn.a420flowershop.Models.ProductModel;
+import fpt.edu.vn.a420flowershop.Models.UserModel;
 import fpt.edu.vn.a420flowershop.R;
 
-public class AdminManageActivity extends AppCompatActivity {
-    Button btn_logout, btn_add_new, btn_manage_acc;
+public class AdminManageAccountActivity extends AppCompatActivity {
+
+    Button btn_logout, btn_add_new, btn_manage_pro;
     RecyclerView recyclerView;
-    ManageProductAdapter manageProductAdapter;
+    ManageAccountAdapter manageAccountAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_manage);
+        setContentView(R.layout.activity_admin_manage_account);
         init_view();
         loadData();
         click_add();
         click_logout();
-        click_Manage_Account();
+        click_Manage_Product();
     }
 
     private void loadData(){
-        FirebaseRecyclerOptions<ProductModel> options = new FirebaseRecyclerOptions.Builder<ProductModel>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("products"), ProductModel.class)
+        FirebaseRecyclerOptions<UserModel> options = new FirebaseRecyclerOptions.Builder<UserModel>()
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Users"), UserModel.class)
                 .build();
-        manageProductAdapter = new ManageProductAdapter(options);
-        recyclerView.setAdapter(manageProductAdapter);
+        manageAccountAdapter = new ManageAccountAdapter(options);
+        recyclerView.setAdapter(manageAccountAdapter);
     }
-
 
     private void init_view() {
         // recyclerView
-        recyclerView = findViewById(R.id.rec_admin);
+        recyclerView = findViewById(R.id.recAccount_admin);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //button
         btn_logout = findViewById(R.id.btnLogout);
         btn_add_new = findViewById(R.id.btnAddNew);
-        btn_manage_acc = findViewById(R.id.btnManageAccount);
+        btn_manage_pro = findViewById(R.id.btnManageProduct);
     }
 
     private void click_add(){
         btn_add_new.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(AdminManageActivity.this, AddNewProductActivity.class));
+                startActivity(new Intent(AdminManageAccountActivity.this, AddNewProductActivity.class));
             }
         });
     }
@@ -69,17 +71,17 @@ public class AdminManageActivity extends AppCompatActivity {
         btn_logout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(AdminManageActivity.this, LoginActivity.class));
-                Toast.makeText(AdminManageActivity.this, "Logout!!!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdminManageAccountActivity.this, LoginActivity.class));
+                Toast.makeText(AdminManageAccountActivity.this, "Logout!!!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void click_Manage_Account(){
-        btn_manage_acc.setOnClickListener(new View.OnClickListener(){
+    private void click_Manage_Product(){
+        btn_manage_pro.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(AdminManageActivity.this, AdminManageAccountActivity.class));
+                startActivity(new Intent(AdminManageAccountActivity.this, AdminManageActivity.class));
             }
         });
     }
@@ -87,12 +89,12 @@ public class AdminManageActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        manageProductAdapter.startListening();
+        manageAccountAdapter.startListening();
     }
     @Override
     protected void onStop(){
         super.onStop();
-        manageProductAdapter.stopListening();
+        manageAccountAdapter.stopListening();
     }
 
     // search product
@@ -118,13 +120,12 @@ public class AdminManageActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    //get product by keyword
     private void txtSearch( String txt){
-        FirebaseRecyclerOptions<ProductModel> options = new FirebaseRecyclerOptions.Builder<ProductModel>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("products").orderByChild("product_name").startAt(txt).endAt(txt+"~"), ProductModel.class)
+        FirebaseRecyclerOptions<UserModel> options = new FirebaseRecyclerOptions.Builder<UserModel>()
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("username").startAt(txt).endAt(txt+"~"), UserModel.class)
                 .build();
-        manageProductAdapter = new ManageProductAdapter(options);
-        manageProductAdapter.startListening();
-        recyclerView.setAdapter(manageProductAdapter);
+        manageAccountAdapter = new ManageAccountAdapter(options);
+        manageAccountAdapter.startListening();
+        recyclerView.setAdapter(manageAccountAdapter);
     }
 }

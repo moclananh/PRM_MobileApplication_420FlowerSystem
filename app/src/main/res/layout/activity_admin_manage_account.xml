@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.AdminActivities.AdminManageActivity">
+    tools:context=".Activities.AdminActivities.AdminManageAccountActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -30,13 +30,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#00BCD4"
-                    android:text="Manage Product"
+                    android:text="Manage Account"
                     android:textAlignment="center"
                     android:textColor="#0C0C0C"
                     android:textSize="34sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rec_admin"
+                    android:id="@+id/recAccount_admin"
                     android:layout_width="match_parent"
                     android:layout_height="557dp"
                     tools:ignore="MissingConstraints"></androidx.recyclerview.widget.RecyclerView>
@@ -70,11 +70,11 @@
             android:text="Add New" />
 
         <Button
-            android:id="@+id/btnManageAccount"
+            android:id="@+id/btnManageProduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="Manage Acc" />
+            android:text="Manage Pro" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
