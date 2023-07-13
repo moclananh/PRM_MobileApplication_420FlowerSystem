@@ -1,13 +1,9 @@
 package fpt.edu.vn.a420flowershop.Adapters;
 
 import android.app.Notification;
-import android.app.NotificationChannel;
+
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -40,7 +36,9 @@ import java.util.HashMap;
 
 import fpt.edu.vn.a420flowershop.Activities.PlacedOrderActivity;
 import fpt.edu.vn.a420flowershop.Models.ProductModel;
-import fpt.edu.vn.a420flowershop.MyApplication;
+
+import fpt.edu.vn.a420flowershop.Config.MyApplication;
+
 import fpt.edu.vn.a420flowershop.R;
 
 public class AllProductAdapter extends FirebaseRecyclerAdapter<ProductModel, AllProductAdapter.allProductViewHolder> {

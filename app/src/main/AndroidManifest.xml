@@ -7,7 +7,9 @@
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
-        android:name=".MyApplication"
+
+        android:name=".Config.MyApplication"
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -21,12 +23,14 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
+
         <activity
             android:name=".Activities.AdminActivities.ManageAccountActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.AdminActivities.AdminPageActivity"
             android:exported="false" />
+
         <activity
             android:name=".Activities.PlacedOrderActivity"
             android:exported="false" />
