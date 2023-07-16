@@ -31,8 +31,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import fpt.edu.vn.a420flowershop.Config.MyApplication;
 import fpt.edu.vn.a420flowershop.Models.ProductModel;
-import fpt.edu.vn.a420flowershop.MyApplication;
 import fpt.edu.vn.a420flowershop.R;
 
 public class CategoryAdapter extends FirebaseRecyclerAdapter<ProductModel, CategoryAdapter.categoryViewHolder> {
