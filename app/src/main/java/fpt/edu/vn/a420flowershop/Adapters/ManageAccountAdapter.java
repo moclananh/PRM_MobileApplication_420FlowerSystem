@@ -38,6 +38,14 @@ public class ManageAccountAdapter extends FirebaseRecyclerAdapter<UserModel, Man
     @Override
     protected void onBindViewHolder(@NonNull ManageAccountAdapter.allAccountViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull UserModel model) {
 
+        if (model.getEmail().equalsIgnoreCase("admin@admin.com")) {
+            // Nếu là "admin", ẩn view của item
+            holder.itemView.setVisibility(View.GONE);
+            holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+        } else {
+            // Nếu không phải là "admin", hiển thị thông tin như bình thường
+            holder.itemView.setVisibility(View.VISIBLE);
+            holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             holder.username.setText(model.getUsername());
             holder.email.setText(model.getEmail());
             holder.address.setText(model.getAddress());
@@ -71,6 +79,7 @@ public class ManageAccountAdapter extends FirebaseRecyclerAdapter<UserModel, Man
                     builder.show();
                 }
             });
+        }
     }
 
     @NonNull
